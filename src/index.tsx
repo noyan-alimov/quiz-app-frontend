@@ -1,12 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ChakraProvider } from "@chakra-ui/react"
+import { Auth0Provider } from "@auth0/auth0-react";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ChakraProvider>
+      <Auth0Provider
+        domain="quiz-app-auth.eu.auth0.com"
+        clientId="lT3Qppoc0kaQWjr49Vg7eUrUYa2WwxJ9"
+        redirectUri={window.location.origin}
+      >
+        <App />
+      </Auth0Provider>
+    </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
