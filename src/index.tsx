@@ -4,6 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from "@chakra-ui/react"
 import { Auth0Provider } from "@auth0/auth0-react";
+import { config } from './config/config';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -12,6 +13,8 @@ ReactDOM.render(
         domain="quiz-app-auth.eu.auth0.com"
         clientId="lT3Qppoc0kaQWjr49Vg7eUrUYa2WwxJ9"
         redirectUri={window.location.origin}
+        audience={config.AUTH0_AUDIENCE}
+        scope=''
       >
         <App />
       </Auth0Provider>

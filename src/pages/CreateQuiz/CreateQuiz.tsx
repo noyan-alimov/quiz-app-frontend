@@ -1,32 +1,38 @@
 import React from 'react'
-import { Box } from '@chakra-ui/react';
+import { Alert, AlertIcon, Box, Button, FormControl, FormLabel, Input, Text } from '@chakra-ui/react';
 import { Formik } from 'formik';
+import { config } from '../../config/config';
+import { useAuth0 } from "@auth0/auth0-react";
+import { observer } from 'mobx-react';
+import { CreateQuizStore } from './CreateQuizStore';
 
 interface CreateQuizProps {
-
+    store: CreateQuizStore
 }
 
-const CreateQuiz: React.FC<CreateQuizProps> = ({ }) => {
+const CreateQuiz: React.FC<CreateQuizProps> = observer(({ store }) => {
+    const { getAccessTokenSilently, user } = useAuth0()
+
     return (
-        <Box>
+        <Box p='10'>
             <Formik
-                initialValues={{ email: '', password: '' }}
+                initialValues={{ question: '' }}
                 validate={values => {
-                    const errors: { email?: string } = {};
-                    if (!values.email) {
-                        errors.email = 'Required';
-                    } else if (
-                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                    ) {
-                        errors.email = 'Invalid email address';
+                    const errors: { question?: string } = {};
+                    if (!values.question) {
+                        errors.question = 'Required';
                     }
+
                     return errors;
                 }}
-                onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                    }, 400);
+                onSubmit={async (values, { setSubmitting, resetForm }) => {
+                    const token = await getAccessTokenSilently({
+                        audience: config.AUTH0_AUDIENCE,
+                        scope: ''
+                    });
+                    await store.createQuizRequest({ token, userId: user.sub, question: values.question })
+                    setSubmitting(false)
+                    resetForm({ values: { question: '' } })
                 }}
             >
                 {({
@@ -39,30 +45,39 @@ const CreateQuiz: React.FC<CreateQuizProps> = ({ }) => {
                     isSubmitting,
                 }) => (
                     <form onSubmit={handleSubmit}>
-                        <input
-                            type="email"
-                            name="email"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.email}
-                        />
-                        {errors.email && touched.email && errors.email}
-                        <input
-                            type="password"
-                            name="password"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.password}
-                        />
-                        {errors.password && touched.password && errors.password}
-                        <button type="submit" disabled={isSubmitting}>
+                        <FormControl>
+                            <FormLabel>Question</FormLabel>
+                            <Input
+                                type='text'
+                                name='question'
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.question}
+                            />
+                            {errors.question && touched.question && (
+                                <Text color='red.500'>{errors.question}</Text>
+                            )}
+                        </FormControl>
+                        <Button type="submit" disabled={isSubmitting} mt='2'>
                             Submit
-           </button>
+                        </Button>
                     </form>
                 )}
             </Formik>
+            {store.createQuizFailure && (
+                <Alert mt='2' status="error">
+                    <AlertIcon />
+                    Error Creating a Quiz
+                </Alert>
+            )}
+            {store.createQuizSuccess && (
+                <Alert mt='2' status="success">
+                    <AlertIcon />
+                    Created Quiz Successfully!
+                </Alert>
+            )}
         </Box>
     );
-}
+})
 
 export default CreateQuiz
