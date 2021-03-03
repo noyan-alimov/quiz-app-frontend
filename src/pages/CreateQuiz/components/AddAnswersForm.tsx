@@ -1,17 +1,43 @@
-import { FormControl, FormLabel, Input, Button, Text, Radio, RadioGroup, Stack } from '@chakra-ui/react';
+import { FormControl, FormLabel, Input, Button, Text, Radio, RadioGroup, Stack, useToast } from '@chakra-ui/react';
 import { Formik, Form, Field } from 'formik';
 import { config } from '../../../config/config';
 import React from 'react'
 import { CreateQuizStore } from '../CreateQuizStore';
 import { useAuth0 } from "@auth0/auth0-react";
 import { returnErrorsObjToValidate } from '../helpers';
+import { observer } from 'mobx-react';
+import { Redirect } from 'react-router-dom';
 
 interface AddAnswersFormProps {
     store: CreateQuizStore
 }
 
-const AddAnswersForm: React.FC<AddAnswersFormProps> = ({ store }) => {
+const AddAnswersForm: React.FC<AddAnswersFormProps> = observer(({ store }) => {
     const { getAccessTokenSilently } = useAuth0()
+    const toast = useToast()
+
+    if (store.addAnswersSuccess) {
+        toast({
+            title: "Success",
+            description: "Added answers to quiz successfully!",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+        })
+        return (
+            <Redirect to='/' />
+        )
+    }
+
+    if (store.addAnswersFailure) {
+        toast({
+            title: "An error occurred.",
+            description: "Unable to add answers to quiz.",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+        })
+    }
 
     return (
         <Formik
@@ -169,6 +195,6 @@ const AddAnswersForm: React.FC<AddAnswersFormProps> = ({ store }) => {
             )}
         </Formik>
     );
-}
+})
 
 export default AddAnswersForm

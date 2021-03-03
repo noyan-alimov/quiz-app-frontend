@@ -1,22 +1,22 @@
 import { config } from '../config/config';
 
-export interface createQuizParams {
+export interface CreateQuizParams {
 	token: string;
 	userId: string;
 	question: string;
 	imageFileName?: string;
 }
 
-export interface createQuizResponseData {
+export interface CreateQuizResponseData {
 	id: number;
 	imageurl: string | null;
 	question: string;
 	userId: string;
 }
 
-export interface createQuizResponse {
+export interface CreateQuizResponse {
 	status: number;
-	data: createQuizResponseData;
+	data: CreateQuizResponseData;
 }
 
 export const createQuiz = async ({
@@ -24,7 +24,7 @@ export const createQuiz = async ({
 	userId,
 	question,
 	imageFileName,
-}: createQuizParams): Promise<createQuizResponse> => {
+}: CreateQuizParams): Promise<CreateQuizResponse> => {
 	if (!imageFileName) {
 		imageFileName = undefined;
 	}

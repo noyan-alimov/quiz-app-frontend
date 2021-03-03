@@ -1,10 +1,11 @@
 import { action, makeObservable, observable, runInAction } from "mobx";
 import { addAnswers, addAnswersParams } from "../../api/addAnswers";
-import { createQuiz, createQuizParams } from "../../api/createQuiz";
+import { createQuiz, CreateQuizParams, CreateQuizResponseData } from "../../api/createQuiz";
 
 export class CreateQuizStore {
     createQuizSuccess: boolean = false
     createQuizFailure: boolean = false
+    currentQuiz: CreateQuizResponseData | undefined
 
     addAnswersSuccess: boolean = false
     addAnswersFailure: boolean = false
@@ -21,7 +22,7 @@ export class CreateQuizStore {
         })
     }
 
-    async createQuizRequest(params: createQuizParams): Promise<void> {
+    async createQuizRequest(params: CreateQuizParams): Promise<void> {
         try {
             const res = await createQuiz(params)
             runInAction(() => {
@@ -29,6 +30,7 @@ export class CreateQuizStore {
                     this.createQuizFailure = true
                 } else {
                     this.createQuizSuccess = true
+                    this.currentQuiz = res.data
                 }
             })
         } catch (err) {
