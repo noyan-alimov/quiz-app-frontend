@@ -4,7 +4,7 @@ const getPutSignedUrl = async (
 	fileName: string
 ): Promise<{ status: number; url: string }> => {
 	const res = await fetch(
-		`${config.IMAGE_PUT_SIGNED_URL}/putSignedUrl/${fileName}`
+		`${config.BACKEND_URL}/image-upload/putSignedUrl/${fileName}`
 	);
 	const data = await res.json();
 	return { status: res.status, url: data.url };

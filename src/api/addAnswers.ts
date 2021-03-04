@@ -1,26 +1,12 @@
 import { config } from '../config/config';
-
-interface AnswerModel {
-	answer: string;
-	correct: boolean;
-}
-
-export interface addAnswersParams {
-	token: string;
-	quizId: number;
-	answers: AnswerModel[];
-}
-
-export interface addAnswersResponse {
-	status: number;
-}
+import { addAnswersParams, addAnswersResponse } from './models';
 
 export const addAnswers = async ({
 	token,
 	quizId,
 	answers,
 }: addAnswersParams): Promise<addAnswersResponse> => {
-	const res = await fetch(`${config.MAIN_BACKEND_URL}/answers`, {
+	const res = await fetch(`${config.BACKEND_URL}/main-backend/answers`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
