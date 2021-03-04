@@ -15,7 +15,7 @@ const App = observer(() => {
       <Header />
       <Switch>
         <Route exact path='/' render={props => (
-          <Home {...props} store={appStore.homeStore} />
+          <Home {...props} homeStore={appStore.homeStore} createQuizStore={appStore.createQuizStore} />
         )} />
         <Route exact path='/createQuiz' render={props => (
           <CreateQuiz {...props} store={appStore.createQuizStore} />

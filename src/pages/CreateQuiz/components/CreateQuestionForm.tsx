@@ -1,7 +1,7 @@
 import { FormControl, FormLabel, Input, Button, Text } from '@chakra-ui/react';
 import { Formik } from 'formik';
 import { config } from '../../../config/config';
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
 import { CreateQuizStore } from '../CreateQuizStore';
 
@@ -11,6 +11,16 @@ interface CreateQuestionFormProps {
 
 const CreateQuestionForm: React.FC<CreateQuestionFormProps> = ({ store }) => {
     const { getAccessTokenSilently, user } = useAuth0()
+
+    const [imageFile, setImageFile] = React.useState<File | null>(null)
+
+    const handleChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files) {
+            const file = event.target.files[0]
+            setImageFile(file)
+        }
+    }
+
     return (
         <Formik
             initialValues={{ question: '' }}
@@ -27,7 +37,11 @@ const CreateQuestionForm: React.FC<CreateQuestionFormProps> = ({ store }) => {
                     audience: config.AUTH0_AUDIENCE,
                     scope: ''
                 });
-                await store.createQuizRequest({ token, userId: user.sub, question: values.question })
+                if (imageFile) {
+                    store.createQuizRequest({ token, userId: user.sub, question: values.question, imageFileName: imageFile.name }, imageFile)
+                } else {
+                    store.createQuizRequest({ token, userId: user.sub, question: values.question })
+                }
                 setSubmitting(false)
                 resetForm({ values: { question: '' } })
             }}
@@ -39,7 +53,7 @@ const CreateQuestionForm: React.FC<CreateQuestionFormProps> = ({ store }) => {
                 handleChange,
                 handleBlur,
                 handleSubmit,
-                isSubmitting,
+                isSubmitting
             }) => (
                 <form onSubmit={handleSubmit}>
                     <FormControl>
@@ -54,10 +68,11 @@ const CreateQuestionForm: React.FC<CreateQuestionFormProps> = ({ store }) => {
                         {errors.question && touched.question && (
                             <Text color='red.500'>{errors.question}</Text>
                         )}
+                        <input type='file' name='file' onChange={handleChangeFile} />
                     </FormControl>
                     <Button type="submit" disabled={isSubmitting} mt='2'>
                         Submit
-                        </Button>
+                    </Button>
                 </form>
             )}
         </Formik>

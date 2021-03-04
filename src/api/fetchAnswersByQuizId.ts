@@ -14,9 +14,7 @@ export interface FetchAnswersResponse {
 export const fetchAnswersByQuizId = async (
 	quizId: number
 ): Promise<FetchAnswersResponse> => {
-	const res = await fetch(
-		`${config.MAIN_BACKEND_URL}/answers?quizId=${quizId}`
-	);
+	const res = await fetch(`${config.MAIN_BACKEND_URL}/answers/quiz/${quizId}`);
 	const data = await res.json();
 	return { status: res.status, data };
 };

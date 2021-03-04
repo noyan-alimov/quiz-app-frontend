@@ -12,9 +12,9 @@ const Quiz: React.FC<QuizProps> = ({ quiz }) => {
         <Box>
             <Text fontSize='3xl' textAlign='center'>{quiz.question}</Text>
             {quiz.imageurl && (
-                <AspectRatio maxW="400px" ratio={4 / 3}>
-                    <Image src={quiz.imageurl} alt={quiz.question} objectFit="cover" />
-                </AspectRatio>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Image textAlign='center' src={quiz.imageurl} alt={quiz.question} objectFit="cover" boxSize="400px" />
+                </div>
             )}
             <Center>
                 <Button>

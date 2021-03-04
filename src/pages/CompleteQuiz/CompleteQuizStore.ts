@@ -38,7 +38,6 @@ export class CompleteQuizStore {
 				});
 			}
 		}
-		console.log(this.answers);
 	}
 
 	getSelectedAnswer(answer: string): AnswerModel | undefined {

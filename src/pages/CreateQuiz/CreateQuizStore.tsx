@@ -1,6 +1,7 @@
 import { action, makeObservable, observable, runInAction } from "mobx";
 import { addAnswers, addAnswersParams } from "../../api/addAnswers";
 import { createQuiz, CreateQuizParams, QuizModel } from "../../api/createQuiz";
+import { uploadImage } from "../../api/uploadImage";
 
 export class CreateQuizStore {
     createQuizSuccess: boolean = false
@@ -21,15 +22,19 @@ export class CreateQuizStore {
         })
     }
 
-    async createQuizRequest(params: CreateQuizParams): Promise<void> {
+    async createQuizRequest(params: CreateQuizParams, file?: File): Promise<void> {
         try {
-            const res = await createQuiz(params)
+            const resultQuestion = await createQuiz(params)
+            if (file) {
+                const resultImageStatus = await uploadImage(file)
+                console.log(resultImageStatus)
+            }
             runInAction(() => {
-                if (res.status !== 201) {
+                if (resultQuestion.status !== 201) {
                     this.createQuizFailure = true
                 } else {
                     this.createQuizSuccess = true
-                    this.currentQuiz = res.data
+                    this.currentQuiz = resultQuestion.data
                 }
             })
         } catch (err) {

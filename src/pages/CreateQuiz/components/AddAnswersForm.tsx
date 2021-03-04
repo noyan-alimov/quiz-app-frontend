@@ -17,26 +17,9 @@ const AddAnswersForm: React.FC<AddAnswersFormProps> = observer(({ store }) => {
     const toast = useToast()
 
     if (store.addAnswersSuccess) {
-        toast({
-            title: "Success",
-            description: "Added answers to quiz successfully!",
-            status: "success",
-            duration: 9000,
-            isClosable: true,
-        })
         return (
             <Redirect to='/' />
         )
-    }
-
-    if (store.addAnswersFailure) {
-        toast({
-            title: "An error occurred.",
-            description: "Unable to add answers to quiz.",
-            status: "error",
-            duration: 9000,
-            isClosable: true,
-        })
     }
 
     return (
@@ -60,6 +43,13 @@ const AddAnswersForm: React.FC<AddAnswersFormProps> = observer(({ store }) => {
                     scope: ''
                 });
                 store.processAnswersInput(token, values)
+                toast({
+                    title: "Success",
+                    description: "Added answers to quiz successfully!",
+                    status: "success",
+                    duration: 9000,
+                    isClosable: true,
+                })
                 setSubmitting(false)
                 resetForm({
                     values: {

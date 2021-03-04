@@ -50,9 +50,9 @@ const CompleteQuiz: React.FC<CompleteQuizProps> = observer(({ match, store }) =>
                 <>
                     <Text fontSize='3xl' textAlign='center'>{store.quiz.question}</Text>
                     {store.quiz.imageurl && (
-                        <AspectRatio maxW="400px" ratio={4 / 3}>
-                            <Image src={store.quiz.imageurl} alt={store.quiz.question} objectFit="cover" />
-                        </AspectRatio>
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <Image src={store.quiz.imageurl} alt={store.quiz.question} objectFit="cover" boxSize="300px" />
+                        </div>
                     )}
                 </>
             )}
