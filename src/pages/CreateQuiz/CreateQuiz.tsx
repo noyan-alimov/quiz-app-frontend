@@ -25,6 +25,7 @@ const CreateQuiz: React.FC<CreateQuizProps> = observer(({ store }) => {
                         <AlertIcon />
                         Created Quiz Successfully!
                         Now Add Answers Below
+                        Please Indicate Only One Correct Answer
                     </Alert>
                     <AddAnswersForm store={store} />
                 </>
