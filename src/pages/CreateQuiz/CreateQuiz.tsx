@@ -24,6 +24,7 @@ const CreateQuiz: React.FC<CreateQuizProps> = observer(({ store }) => {
                     <Alert mt='2' status="success">
                         <AlertIcon />
                         Created Quiz Successfully!
+                        Now Add Answers Below
                     </Alert>
                     <AddAnswersForm store={store} />
                 </>

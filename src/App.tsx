@@ -20,7 +20,9 @@ const App = observer(() => {
         <Route exact path='/createQuiz' render={props => (
           <CreateQuiz {...props} store={appStore.createQuizStore} />
         )} />
-        <Route exact path='/quiz/:id' component={CompleteQuiz} />
+        <Route exact path='/quizzes/:id' render={props => (
+          <CompleteQuiz {...props} store={appStore.completeQuizStore} />
+        )} />
       </Switch>
     </BrowserRouter>
   );

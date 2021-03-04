@@ -17,7 +17,6 @@ export class CreateQuizStore {
             addAnswersSuccess: observable,
             addAnswersFailure: observable,
             createQuizRequest: action,
-            // processAnswersInput: action,
             addAnswersToQuiz: action
         })
     }
@@ -40,12 +39,12 @@ export class CreateQuizStore {
         }
     }
 
-    processAnswersInput(token: string, quizId: number, values: AnswersInputModel) {
+    processAnswersInput(token: string, values: AnswersInputModel) {
         const answers = convertAnswersInputObjToArr(values)
 
         const params = {
             token,
-            quizId,
+            quizId: this.currentQuiz!.id,
             answers
         }
 

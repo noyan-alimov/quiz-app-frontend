@@ -29,7 +29,11 @@ const Header: React.FC<HeaderProps> = ({ }) => {
     return (
         <Flex bgColor='teal.50' p='3'>
             <Center>
-                {`Welcome ${user.name}!`}
+                <Link as='div'>
+                    <RouterLink to='/'>
+                        {`Welcome ${user.name}!`}
+                    </RouterLink>
+                </Link>
             </Center>
             <Spacer />
             <Center>

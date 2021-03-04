@@ -59,7 +59,7 @@ const AddAnswersForm: React.FC<AddAnswersFormProps> = observer(({ store }) => {
                     audience: config.AUTH0_AUDIENCE,
                     scope: ''
                 });
-                store.processAnswersInput(token, 1, values)
+                store.processAnswersInput(token, values)
                 setSubmitting(false)
                 resetForm({
                     values: {

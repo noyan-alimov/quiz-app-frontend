@@ -18,7 +18,7 @@ const Quiz: React.FC<QuizProps> = ({ quiz }) => {
             )}
             <Center>
                 <Button>
-                    <Link to={`/quiz/${quiz.id}`}>Answer</Link>
+                    <Link to={`/quizzes/${quiz.id}`}>Answer</Link>
                 </Button>
             </Center>
         </Box>

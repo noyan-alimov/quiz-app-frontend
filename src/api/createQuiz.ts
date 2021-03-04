@@ -14,7 +14,7 @@ export interface QuizModel {
 	userId: string;
 }
 
-export interface CreateQuizResponse {
+export interface QuizResponse {
 	status: number;
 	data: QuizModel;
 }
@@ -24,7 +24,7 @@ export const createQuiz = async ({
 	userId,
 	question,
 	imageFileName,
-}: CreateQuizParams): Promise<CreateQuizResponse> => {
+}: CreateQuizParams): Promise<QuizResponse> => {
 	if (!imageFileName) {
 		imageFileName = undefined;
 	}
