@@ -1,11 +1,11 @@
 import { action, makeObservable, observable, runInAction } from "mobx";
 import { addAnswers, addAnswersParams } from "../../api/addAnswers";
-import { createQuiz, CreateQuizParams, CreateQuizResponseData } from "../../api/createQuiz";
+import { createQuiz, CreateQuizParams, QuizModel } from "../../api/createQuiz";
 
 export class CreateQuizStore {
     createQuizSuccess: boolean = false
     createQuizFailure: boolean = false
-    currentQuiz: CreateQuizResponseData | undefined
+    currentQuiz: QuizModel | undefined
 
     addAnswersSuccess: boolean = false
     addAnswersFailure: boolean = false

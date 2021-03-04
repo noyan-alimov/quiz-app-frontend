@@ -7,7 +7,7 @@ export interface CreateQuizParams {
 	imageFileName?: string;
 }
 
-export interface CreateQuizResponseData {
+export interface QuizModel {
 	id: number;
 	imageurl: string | null;
 	question: string;
@@ -16,7 +16,7 @@ export interface CreateQuizResponseData {
 
 export interface CreateQuizResponse {
 	status: number;
-	data: CreateQuizResponseData;
+	data: QuizModel;
 }
 
 export const createQuiz = async ({

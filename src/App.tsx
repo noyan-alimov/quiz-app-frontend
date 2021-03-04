@@ -5,6 +5,7 @@ import CreateQuiz from './pages/CreateQuiz/CreateQuiz';
 import Home from './pages/Home/Home';
 import { appStoreContext } from './AppStore';
 import { observer } from 'mobx-react';
+import CompleteQuiz from './pages/CompleteQuiz/CompleteQuiz';
 
 const App = observer(() => {
   const appStore = React.useContext(appStoreContext)
@@ -13,10 +14,13 @@ const App = observer(() => {
     <BrowserRouter>
       <Header />
       <Switch>
-        <Route exact path='/' component={Home} />
+        <Route exact path='/' render={props => (
+          <Home {...props} store={appStore.homeStore} />
+        )} />
         <Route exact path='/createQuiz' render={props => (
           <CreateQuiz {...props} store={appStore.createQuizStore} />
         )} />
+        <Route exact path='/quiz/:id' component={CompleteQuiz} />
       </Switch>
     </BrowserRouter>
   );
