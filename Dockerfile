@@ -2,7 +2,13 @@ FROM node:14.16.0-alpine3.10 as builder
 
 WORKDIR /app
 
-COPY build .
+COPY package*.json .
+
+RUN npm i
+
+COPY . .
+
+RUN npm run build
 
 
 FROM nginx
