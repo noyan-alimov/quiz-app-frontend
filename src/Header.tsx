@@ -3,11 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Center, Button, Flex, Spinner, Spacer, Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 
-interface HeaderProps {
-
-}
-
-const Header: React.FC<HeaderProps> = ({ }) => {
+const Header: React.FC = () => {
     const { loginWithRedirect, logout, isAuthenticated, isLoading, user } = useAuth0();
 
     if (isLoading) {

@@ -1,5 +1,5 @@
 import { config } from '../config/config';
-import { QuizModel, FetchAllQuizzesResponse } from './models';
+import { FetchAllQuizzesResponse } from './models';
 
 export const fetchAllQuizzes = async (): Promise<FetchAllQuizzesResponse> => {
 	const res = await fetch(`${config.BACKEND_URL}/main-backend/quizzes`);

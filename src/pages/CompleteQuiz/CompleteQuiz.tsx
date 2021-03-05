@@ -1,4 +1,4 @@
-import { Box, Text, AspectRatio, Image, RadioGroup, Stack, Radio, Center, Button, toast, useToast } from '@chakra-ui/react';
+import { Box, Text, Image, RadioGroup, Stack, Radio, Center, Button, useToast } from '@chakra-ui/react';
 import { observer } from 'mobx-react';
 import React, { ReactText } from 'react'
 import { CompleteQuizStore } from './CompleteQuizStore';
@@ -13,6 +13,7 @@ const CompleteQuiz: React.FC<CompleteQuizProps> = observer(({ match, store }) =>
 
     React.useEffect(() => {
         store.loadQuiz(+quizId)
+        // eslint-disable-next-line
     }, [])
 
     const [value, setValue] = React.useState<string>('')
