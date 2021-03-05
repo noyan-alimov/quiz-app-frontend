@@ -7,6 +7,7 @@ import { appStoreContext } from './AppStore';
 import { observer } from 'mobx-react';
 import CompleteQuiz from './pages/CompleteQuiz/CompleteQuiz';
 
+
 const App = observer(() => {
   const appStore = React.useContext(appStoreContext)
 
