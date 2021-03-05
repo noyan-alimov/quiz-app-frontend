@@ -1,7 +1,7 @@
 import { Box, AspectRatio, Center, Button, Text, Image } from '@chakra-ui/react';
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { QuizModel } from '../../../api/createQuiz';
+import { QuizModel } from '../../../api/models';
 
 interface QuizProps {
     quiz: QuizModel

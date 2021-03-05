@@ -1,6 +1,7 @@
 import { action, makeObservable, observable, runInAction } from "mobx";
-import { addAnswers, addAnswersParams } from "../../api/addAnswers";
-import { createQuiz, CreateQuizParams, QuizModel } from "../../api/createQuiz";
+import { addAnswers } from "../../api/addAnswers";
+import { createQuiz } from "../../api/createQuiz";
+import { CreateQuizParams, QuizModel, addAnswersParams } from "../../api/models";
 import { uploadImage } from "../../api/uploadImage";
 
 export class CreateQuizStore {

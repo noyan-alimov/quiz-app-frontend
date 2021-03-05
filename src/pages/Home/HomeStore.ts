@@ -1,5 +1,5 @@
 import { makeObservable, observable, runInAction, action } from 'mobx';
-import { QuizModel } from '../../api/createQuiz';
+import { QuizModel } from '../../api/models';
 import { fetchAllQuizzes } from '../../api/fetchAllQuizzes';
 
 export class HomeStore {

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quiz-app-frontend
+  labels:
+    app: quiz-app-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: quiz-app-frontend
+  template:
+    metadata:
+      labels:
+        app: quiz-app-frontend
+    spec:
+      containers:
+        - name: quiz-app-frontend
+          image: noyan09/quiz-app-frontend
+          ports:
+            - containerPort: 80

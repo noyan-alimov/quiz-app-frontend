@@ -1,9 +1,6 @@
 import { action, makeObservable, observable, runInAction } from 'mobx';
-import { QuizModel } from '../../api/createQuiz';
-import {
-	AnswerModel,
-	fetchAnswersByQuizId,
-} from '../../api/fetchAnswersByQuizId';
+import { QuizModel, AnswerModel } from '../../api/models';
+import { fetchAnswersByQuizId } from '../../api/fetchAnswersByQuizId';
 import { fetchQuizById } from '../../api/fetchQuizById';
 
 export class CompleteQuizStore {
