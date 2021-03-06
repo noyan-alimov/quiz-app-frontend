@@ -68,6 +68,7 @@ const CreateQuestionForm: React.FC<CreateQuestionFormProps> = ({ store }) => {
                         {errors.question && touched.question && (
                             <Text color='red.500'>{errors.question}</Text>
                         )}
+                        <Text>Image Uploading is temporarily unavailable due to AWS S3 CORS issue</Text>
                         <input type='file' name='file' onChange={handleChangeFile} />
                     </FormControl>
                     <Button type="submit" disabled={isSubmitting} mt='2'>
