@@ -15,7 +15,7 @@ const Home: React.FC<HomeProps> = observer(({ homeStore }) => {
     }, [])
 
     return (
-        <Stack spacing={5} mb={10}>
+        <Stack spacing={10} mb={10}>
             {homeStore.quizzes.map(quiz => (
                 <Quiz key={quiz.id} quiz={quiz} />
             ))}

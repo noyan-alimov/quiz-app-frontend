@@ -9,19 +9,21 @@ interface QuizProps {
 
 const Quiz: React.FC<QuizProps> = ({ quiz }) => {
     return (
-        <Box>
-            <Text fontSize='3xl' textAlign='center'>{quiz.question}</Text>
-            {quiz.imageurl && (
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Image textAlign='center' src={quiz.imageurl} alt={quiz.question} objectFit="cover" boxSize="400px" />
-                </div>
-            )}
-            <Center>
-                <Button>
-                    <Link to={`/quizzes/${quiz.id}`}>Answer</Link>
-                </Button>
-            </Center>
-        </Box>
+        <Center mt={10}>
+            <Box bg='teal.50' w='500px' p={3}>
+                <Text fontSize='2xl' textAlign='center'>{quiz.question}</Text>
+                {quiz.imageurl && (
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <Image textAlign='center' src={quiz.imageurl} alt={quiz.question} objectFit="cover" boxSize="400px" />
+                    </div>
+                )}
+                <Center mt={5}>
+                    <Button>
+                        <Link to={`/quizzes/${quiz.id}`}>Answer</Link>
+                    </Button>
+                </Center>
+            </Box>
+        </Center>
     );
 }
 

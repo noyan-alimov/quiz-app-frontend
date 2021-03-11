@@ -16,8 +16,24 @@ const Header: React.FC = () => {
 
     if (!isAuthenticated) {
         return (
-            <Flex>
-                <Button onClick={() => loginWithRedirect()}>Log In</Button>
+            <Flex bgColor='teal.50' p='3'>
+                <Center>
+                    <Link as='div'>
+                        <RouterLink to='/'>
+                            Home
+                        </RouterLink>
+                    </Link>
+                </Center>
+                <Spacer />
+                <Center>
+                    <Link onClick={() => loginWithRedirect()}>
+                        Login to Create Quiz
+                    </Link>
+                </Center>
+                <Spacer />
+                <Center>
+                    <Button onClick={() => loginWithRedirect()}>Log In</Button>
+                </Center>
             </Flex>
         )
     }
